@@ -1,0 +1,72 @@
+.row {
+     max-width: $grid-width; //menentukan lebar maksimum
+     margin: 0 auto; // 0 atas bawah - auto kanan kiri
+     
+ 
+     &:not(:last-child) //selain :last-child
+     {
+         margin-bottom: $gutter-vertical; //jarak kebawah
+ 
+         @include respond(tab-port) {
+             margin-bottom: $gutter-vertical-small;            
+         }
+     }
+ 
+     @include respond(tab-port) {
+         max-width: 50rem;
+         padding:  0 3rem;
+     }
+ 
+     @include clearfix;
+ 
+     [class^="col-"] { // memilih semua elemen yang memiliki kelas yang dimulai dengan "col-"
+         float: left;
+ 
+         &:not(:last-child) {
+             margin-right: $gutter-horizontal;
+ 
+             @include respond(tab-port) {
+                 margin-right: 0; 
+                 margin-bottom: $gutter-vertical-small;           
+             }
+         }
+ 
+         @include respond(tab-port) {
+             width: 100% !important;
+         }
+ 
+     }
+ 
+ 
+     .col-1-of-2 {
+         //untuk menghitung lebar elemen. Ini mengambil 100% lebar container, mengurangkan gutter horizontal, dan dibagi dua.
+         width: calc((100% - #{$gutter-horizontal}) / 2); 
+       
+     }
+ 
+     .col-1-of-3 {
+         //untuk menghitung lebar elemen. Ini mengambil 100% lebar container, mengurangkan dua kali gutter horizontal, dan dibagi tiga.
+         width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+     }
+ 
+     .col-2-of-3 {
+         //Ini mengambil dua pertiga dari 100% lebar container, mengurangkan dua kali gutter horizontal, dan menambahkan gutter horizontal lagi.
+         width: calc(2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
+     }
+ 
+     .col-1-of-4 {
+         //Ini mengambil 100% lebar container, mengurangkan tiga kali gutter horizontal, dan dibagi empat.
+         width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+     }
+ 
+     .col-2-of-4 {
+         //untuk menghitung lebar elemen. Ini mengambil dua perempat dari 100% lebar container, mengurangkan tiga kali gutter horizontal, dan menambahkan gutter horizontal lagi.
+         width: calc(2 * ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal});
+     }
+ 
+     .col-3-of-4 {
+         //menghitung lebar elemen. Ini mengambil tiga perempat dari 100% lebar container, mengurangkan tiga kali gutter horizontal, dan menambahkan dua kali gutter horizontal lagi.
+         width: calc(3 * ((100% - 3 * #{$gutter-horizontal}) / 4) +  2 * #{$gutter-horizontal});
+     }
+ 
+ }
