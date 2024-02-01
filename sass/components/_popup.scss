@@ -1,0 +1,103 @@
+.popup{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, .8);
+    z-index: 9999;
+    opacity: 0; //membuat elemen tetap memengaruhi tata letak dan masih berinteraksi dengan pengguna secara transparan, 
+    visibility: hidden;//sepenuhnya menyembunyikan elemen dari tata letak dan pengguna
+    transition: all .3s;
+    
+    
+
+    @supports(-webkit-backdrop-filter: blur(10px)) or  ( backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px); // filter yang akan diterapkan pada elemen latar belakang.
+        background-color: rgba($color-black, .3);
+    }
+
+    &__content {
+        @include absCenter;
+
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;
+        display: table;
+        overflow: hidden;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+        transition: all .5s .2s;
+    }
+
+    &__left {
+        width: 33.333333%;
+        display: table-cell;
+    }
+
+    &__right {
+        width: 66.6666667%;
+        display: table-cell; //garis potongan
+        vertical-align: middle; //Nilai middle digunakan untuk menyusun elemen ke tengah vertikal dari sel tabel tersebut.
+        padding: 3rem 5rem;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+
+        -moz-column-count: 2; //dibagi menjadi dua kolom.
+        -moz-column-gap: 4rem; //jarak antara kolom-kolom //1em = 14px
+        -moz-column-rule: 1px solid $color-grey-light-2; //garis pemisah
+
+        column-count: 2; //dibagi menjadi dua kolom.
+        column-gap: 4rem; //jarak antara kolom-kolom //1em = 14px
+        column-rule: 1px solid $color-grey-light-2; //garis pemisah
+
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        -webkit-hyphens: auto;
+
+        hyphens: auto; //kata-kata dapat dipenggal (dihyphenate) secara otomatis agar teks dapat lebih baik menyesuaikan dengan lebar kontainer atau area tampilan, terutama dalam situasi responsif di mana lebar area tampilan berubah.
+    }
+
+    //open states
+
+    
+    &:target { //menetapkan aturan stil saat elemen dengan ID yang sesuai menjadi target dalam URL 
+        opacity: 1;
+        visibility: visible; //digunakan untuk membuatnya kembali terlihat jika diperlukan.
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1; //membuat tinggi baris setara dengan tinggi font pada teks yang ada di dalam elemen &__close
+        }
+
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}

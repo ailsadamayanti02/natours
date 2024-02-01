@@ -1,0 +1,112 @@
+//tombol / button
+
+.btn {
+    &,
+    &:link, /* tautan blm d kunjungi*/
+    &:visited /*tuatan sdh dikunjungi*/{
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem; 
+    
+    
+    /*
+    Atas (Top): 15 piksel
+    Kanan (Right): 40 piksel
+    Bawah (Bottom): 15 piksel
+    Kiri (Left): 40 piksel
+    */
+
+    display: inline-block;
+    border-radius: 10rem; /*sudut atau lengkungan*/
+    transition: all .2s; /*  berarti semua properti akan memiliki efek transisi */
+    position: relative;
+    font-size: $default-font-size;
+
+    //change for the <button> element
+    border: none;
+    cursor: pointer;
+    }
+
+    &:hover { /*saat kurosr diarahkan */
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black,.2); /* box-shadow: horizontal vertical blur-radius spread-radius color;*/
+
+    &::after{ /*ketika diarahkan kursornya maka akan muncul lapisan paling belakang nya*/
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+    
+        }
+    
+    }
+
+    &:active,
+    &:focus { /*saat ditekan*/
+    outline: none;
+    transform: translateY(-1px); 
+    box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+    }
+
+    &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+        &::after{
+        background-color: $color-white;
+        }
+
+    }
+
+    &--green {
+        background-color: $color-primary;
+        color: $color-white;
+    
+            &::after{
+            background-color: $color-primary;
+            }
+    
+        }
+
+    &::after { 
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* mengatur index tumpukan */ /*lapisan belakang*/
+    transition: all .4s;
+    
+    }
+
+    &--animated {
+    animation: moveInBottom .5s ease-out .75s;
+    animation-fill-mode: backwards; /*didulukan*/
+    }
+}
+
+.btn-text{
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary; //warna garis pada sisi bawah
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black,.15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 .5rem 1rem rgba($color-black,.15);
+        transform: translateY(0);
+    }
+}
